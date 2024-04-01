@@ -21,6 +21,7 @@ public class UpdateConnectionStatus : MonoBehaviour, INetworkRunnerCallbacks
     public AudioClip playerLeft;
 
     public TextMeshProUGUI sessionStatus;
+    public TextMeshProUGUI debugText;
        
     private void Start()
     {
@@ -76,12 +77,14 @@ public class UpdateConnectionStatus : MonoBehaviour, INetworkRunnerCallbacks
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
     {
         DebugLog($"Shutdown : { shutdownReason} ");
+        debugText.text = shutdownReason.ToString();
         audioSource.PlayOneShot(shutdown);
     }
 
     public void OnConnectedToServer(NetworkRunner runner)
     {
         DebugLog("Connected to the server");
+        debugText.text = "Connected to the server";
         audioSource.PlayOneShot(connectedToServer);
     }
 
